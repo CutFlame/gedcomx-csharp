@@ -35,6 +35,23 @@ namespace Gx.Rs.Api.Options
 
         public void Apply(IRestRequest request)
         {
+			#if __MOBILE__
+			UriTemplate builder = new UriTemplate(request.Resource);
+			if(builder.GetParameterNames ().Contains (this.name))
+			{
+				builder.SetParameter(this.name, this.values);
+				request.Resource = builder.Resolve ();
+			}
+			else
+			{
+				string val = string.Empty;
+				if (this.values != null && this.values.Length != 0)
+				{
+					val = this.values [0];
+				}
+				request.Resource = string.Format ("{0}&{1}={2}", request.Resource, this.name, val);
+			}
+			#else
             var url = new Url(request.Resource);
             var query = url.QueryParams.ToList();
 
@@ -44,6 +61,7 @@ namespace Gx.Rs.Api.Options
             }
 
             request.Resource = url.Path + "?" + String.Join("&", query.Select(x => x.Key + "=" + x.Value));
+			#endif
         }
 
         public static QueryParameter accessToken(String value)
