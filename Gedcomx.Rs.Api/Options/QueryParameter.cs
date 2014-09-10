@@ -49,7 +49,9 @@ namespace Gx.Rs.Api.Options
 				{
 					val = this.values [0];
 				}
-				request.Resource = string.Format ("{0}&{1}={2}", request.Resource, this.name, val);
+				string resource = request.Resource;
+				char separator = (resource.Contains ('?')) ? '&':'?';
+				request.Resource = string.Format ("{0}{1}{2}={3}", resource, separator, this.name, val);
 			}
 			#else
             var url = new Url(request.Resource);
