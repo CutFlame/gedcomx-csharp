@@ -65,7 +65,7 @@ namespace Gx.Rs.Api
             IRestClient client;
             bool enableJerseyLogging;
 
-            client = new RestClient(uri.GetBaseUrl())
+			client = new RestClient(uri.GetLeftPart (UriPartial.Authority))
             {
                 FollowRedirects = false,
             };

@@ -1,4 +1,6 @@
-﻿using Flurl;
+﻿#if !__MOBILE__
+using Flurl;
+#endif
 using RestSharp;
 using System;
 using System.Collections.Generic;
