@@ -8,6 +8,7 @@ using Gx.Fs;
 using Gx.Fs.Rt;
 using Gx.Common;
 using System.Collections.Generic;
+using Gedcomx.Model.Util;
 
 namespace Gx.Fs.Discussions
 {
@@ -75,6 +76,7 @@ namespace Gx.Fs.Discussions
         [System.Xml.Serialization.XmlElementAttribute(ElementName = "created", Namespace = "http://familysearch.org/v1/")]
         [System.Xml.Serialization.SoapElementAttribute(ElementName = "created")]
         [Newtonsoft.Json.JsonProperty("created")]
+        [Newtonsoft.Json.JsonConverter(typeof(JsonUnixTimestampConverter))]
         public DateTime Created
         {
             get
@@ -130,6 +132,7 @@ namespace Gx.Fs.Discussions
         [System.Xml.Serialization.XmlElementAttribute(ElementName = "modified", Namespace = "http://familysearch.org/v1/")]
         [System.Xml.Serialization.SoapElementAttribute(ElementName = "modified")]
         [Newtonsoft.Json.JsonProperty("modified")]
+        [Newtonsoft.Json.JsonConverter(typeof(JsonUnixTimestampConverter))]
         public DateTime Modified
         {
             get
@@ -280,6 +283,90 @@ namespace Gx.Fs.Discussions
                 _comments = new List<Comment>();
             }
             _comments.Add(comment);
+        }
+
+        /**
+         * Build out this discussion by applying a title.
+         * 
+         * @param title The title.
+         * @return this.
+         */
+        public Discussion SetTitle(String title)
+        {
+            Title = title;
+            return this;
+        }
+
+        /**
+         * Build out this discussion by applying details.
+         *
+         * @param details The details.
+         * @return this.
+         */
+        public Discussion SetDetails(String details)
+        {
+            Details = details;
+            return this;
+        }
+
+        /**
+         * Build out this discussion by applying a contributor.
+         *
+         * @param contributor The contributor.
+         * @return this.
+         */
+        public Discussion SetContributor(ResourceReference contributor)
+        {
+            Contributor = contributor;
+            return this;
+        }
+
+        /**
+         * Build out this discussion by applying a created date.
+         *
+         * @param created The created date.
+         * @return this.
+         */
+        public Discussion SetCreated(DateTime created)
+        {
+            Created = created;
+            return this;
+        }
+
+        /**
+         * Build out this discussion by applying a modified date.
+         *
+         * @param modified The modified date.
+         * @return this.
+         */
+        public Discussion SetModified(DateTime modified)
+        {
+            Modified = modified;
+            return this;
+        }
+
+        /**
+         * Build our this discussion by setting a number of comments.
+         *
+         * @param numberOfComments The number of comments.
+         * @return this.
+         */
+        public Discussion SetNumberOfComments(Int32 numberOfComments)
+        {
+            NumberOfComments = numberOfComments;
+            return this;
+        }
+
+        /**
+         * Build out this discussion by adding a comment.
+         *
+         * @param comment The comment to add.
+         * @return this.
+         */
+        public Discussion SetComment(Comment comment)
+        {
+            AddComment(comment);
+            return this;
         }
     }
 }

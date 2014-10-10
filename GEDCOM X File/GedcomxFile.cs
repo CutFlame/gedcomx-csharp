@@ -13,14 +13,14 @@ namespace Gedcomx.File
         private readonly FileInfo gedxFile;
         private readonly ZipArchive gedxArc;
         private readonly GedcomxEntryDeserializer deserializer;
-        private readonly Dictionary<ZipArchiveEntry, List<ManifestAttribute>> attributes;
+        private readonly ManifestAttributes attributes;
 
         public GedcomxFile(FileInfo gedxFile, GedcomxEntryDeserializer deserializer)
         {
             this.gedxFile = gedxFile;
             this.gedxArc = ZipFile.OpenRead(gedxFile.FullName);
             this.deserializer = deserializer;
-            this.attributes = ManifestAttributesParser.Parse(this.gedxArc);
+            this.attributes = ManifestAttributes.Parse(this.gedxArc);
         }
 
         /**
@@ -30,7 +30,7 @@ namespace Gedcomx.File
          * @throws IOException if an I/O error has occurred
          */
         public GedcomxFile(FileInfo zipFile, params Type[] types)
-            : this(zipFile, new DefaultXMLSerialization(types))
+            : this(zipFile, new DefaultXmlSerialization(types))
         {
         }
 
@@ -42,7 +42,7 @@ namespace Gedcomx.File
          */
         public String GetAttribute(String name)
         {
-            var collection = attributes != null ? attributes.Where(x => x.Key.FullName == "META-INF/MANIFEST.MF").Select(x => x.Value).FirstOrDefault() : null;
+            var collection = attributes != null ? attributes.MainAttributes : null;
             return collection != null ? collection.Where(x => x.Name == name).Select(x => x.Value).FirstOrDefault() : null;
         }
 
@@ -55,7 +55,7 @@ namespace Gedcomx.File
         {
             get
             {
-                return attributes != null ? attributes.Where(x => x.Key.FullName == "META-INF/MANIFEST.MF").Select(x => x.Value).FirstOrDefault() : null;
+                return attributes != null ? attributes.MainAttributes : null;
             }
         }
 
@@ -70,7 +70,7 @@ namespace Gedcomx.File
             {
                 foreach (var entry in this.gedxArc.Entries)
                 {
-                    var collection = attributes != null ? attributes[entry] : null;
+                    var collection = attributes != null ? attributes[entry.FullName] : null;
                     yield return new GedcomxFileEntry(entry, collection);
                 }
             }
@@ -95,9 +95,9 @@ namespace Gedcomx.File
          *
          * @throws IOException If there was a problem unmarshalling the resource.
          */
-        public Object ReadResource(GedcomxFileEntry gedxEntry)
+        public T ReadResource<T>(GedcomxFileEntry gedxEntry)
         {
-            return this.deserializer.Deserialize(GetResourceStream(gedxEntry));
+            return this.deserializer.Deserialize<T>(GetResourceStream(gedxEntry));
         }
 
 

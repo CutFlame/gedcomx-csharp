@@ -19,7 +19,7 @@ namespace Gx.Common
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://gedcomx.org/v1/", TypeName = "Note")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace = "http://gedcomx.org/v1/", TypeName = "Note")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://gedcomx.org/v1/", ElementName = "note")]
-    public partial class Note : Gx.Links.HypermediaEnabledData
+    public partial class Note : Gx.Links.HypermediaEnabledData, Attributable
     {
 
         private string _lang;
@@ -103,6 +103,52 @@ namespace Gx.Common
         public void Accept(GedcomxModelVisitor visitor)
         {
             visitor.VisitNote(this);
+        }
+
+        /**
+         * Build up this note with a locale.
+         *
+         * @param lang The locale.
+         */
+        public Note SetLang(String lang)
+        {
+            this.Lang = lang;
+            return this;
+        }
+
+        /**
+         * Build up this note with a subject.
+         *
+         * @param text The subject.
+         * @return this.
+         */
+        public Note SetSubject(String text)
+        {
+            this.Subject = text;
+            return this;
+        }
+
+        /**
+         * Build up this note with some text.
+         *
+         * @param text The text.
+         */
+        public Note SetText(String text)
+        {
+            this.Text = text;
+            return this;
+        }
+
+        /**
+         * Build up this note with attribution.
+         *
+         * @param attribution The attribution.
+         * @return this.
+         */
+        public Note SetAttribution(Attribution attribution)
+        {
+            this.Attribution = attribution;
+            return this;
         }
     }
 }
