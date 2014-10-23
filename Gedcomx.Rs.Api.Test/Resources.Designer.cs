@@ -61,6 +61,16 @@ namespace Gedcomx.Rs.Api.Test {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] MemoryTXT {
+            get {
+                object obj = ResourceManager.GetObject("MemoryTXT", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap PersonImage {
@@ -71,22 +81,57 @@ namespace Gedcomx.Rs.Api.Test {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to 1234pass.
         /// </summary>
-        internal static byte[] PersonMemory {
+        internal static string PublicPassword {
             get {
-                object obj = ResourceManager.GetObject("PersonMemory", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("PublicPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to general_public_user.
+        /// </summary>
+        internal static string PublicUserName {
+            get {
+                return ResourceManager.GetString("PublicUserName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] sample {
+        internal static byte[] SampleGEDX {
             get {
-                object obj = ResourceManager.GetObject("sample", resourceCulture);
+                object obj = ResourceManager.GetObject("SampleGEDX", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WCQY-7J1Q-GKVV-7DNM-SQ5M-9Q5H-JX3H-CMJK.
+        /// </summary>
+        internal static string TestClientId {
+            get {
+                return ResourceManager.GetString("TestClientId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1234sdkpass.
+        /// </summary>
+        internal static string TestPassword {
+            get {
+                return ResourceManager.GetString("TestPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sdktester.
+        /// </summary>
+        internal static string TestUserName {
+            get {
+                return ResourceManager.GetString("TestUserName", resourceCulture);
             }
         }
     }

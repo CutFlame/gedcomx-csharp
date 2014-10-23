@@ -6,6 +6,7 @@ using Gx.Rs.Api;
 using Gx.Rs.Api.Util;
 using Gx.Source;
 using Gx.Types;
+using iTextSharp.text.pdf;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace Gedcomx.Rs.Api.Test
     {
         private static Random random = new Random();
 
-        public static Person GetCreateMalePerson()
+        public static Person GetPersonForDeepCompare()
         {
             return new Person()
             {
@@ -234,136 +235,88 @@ namespace Gedcomx.Rs.Api.Test
             };
         }
 
+        public static Person GetCreateMalePerson()
+        {
+            return new Person()
+                .SetLiving(false)
+                .SetGender(new Gender().SetType(GenderType.Male))
+                .SetName(new Name()
+                    .SetType(NameType.BirthName)
+                    .SetNameForm(new NameForm()
+                        .SetFullText("GedcomX User")
+                        .SetPart(new NamePart(NamePartType.Given, "GedcomX"))
+                        .SetPart(new NamePart(NamePartType.Surname, "User")))
+                    .SetNameForm(new NameForm()
+                        .SetFullText("GedcomX2 User")
+                        .SetPart(new NamePart(NamePartType.Given, "GedcomX2"))
+                        .SetPart(new NamePart(NamePartType.Surname, "User")))
+                    .SetPreferred(true))
+                .SetFact(new Fact()
+                    .SetType(FactType.Birth)
+                    .SetDate(new DateInfo().SetOriginal("June 1800"))
+                    .SetPlace(new PlaceReference().SetOriginal("Provo, Utah, Utah, United States")))
+                .SetFact(new Fact()
+                    .SetType(FactType.Christening)
+                    .SetDate(new DateInfo().SetOriginal("1802"))
+                    .SetPlace(new PlaceReference().SetOriginal("American Fork, Utah, Utah, United States")))
+                .SetFact(new Fact()
+                    .SetType(FactType.Residence)
+                    .SetDate(new DateInfo().SetOriginal("4 Jan 1896"))
+                    .SetPlace(new PlaceReference().SetOriginal("Provo, Utah, Utah, United States")))
+                .SetFact(new Fact()
+                    .SetType(FactType.Death)
+                    .SetDate(new DateInfo().SetOriginal("July 14, 1900"))
+                    .SetPlace(new PlaceReference().SetOriginal("Provo, Utah, Utah, United States")))
+                .SetFact(new Fact()
+                    .SetType(FactType.Burial)
+                    .SetDate(new DateInfo().SetOriginal("1900"))
+                    .SetPlace(new PlaceReference().SetOriginal("Sandy, Salt Lake, Utah, United States")));
+        }
+
         public static Person GetCreateFemalePerson()
         {
             return new Person()
-            {
-                Living = false,
-                Gender = new Gender()
-                {
-                    KnownType = Gx.Types.GenderType.Female,
-                },
-                Names = new List<Name>()
-                {
-                    new Name()
-                    {
-                        KnownType = Gx.Types.NameType.BirthName,
-                        NameForms = new List<NameForm>()
-                        {
-                            new NameForm()
-                            {
-                                FullText = "GedcomX User",
-                                Parts = new List<NamePart>()
-                                {
-                                    new NamePart()
-                                    {
-                                        KnownType = Gx.Types.NamePartType.Given,
-                                        Value = "GedcomX",
-                                    },
-                                    new NamePart()
-                                    {
-                                        KnownType = Gx.Types.NamePartType.Surname,
-                                        Value = "User",
-                                    }
-                                }
-                            },
-                            new NameForm()
-                            {
-                                FullText = "GedcomX2 User",
-                                Parts = new List<NamePart>()
-                                {
-                                    new NamePart()
-                                    {
-                                        KnownType = Gx.Types.NamePartType.Given,
-                                        Value = "GedcomX2",
-                                    },
-                                    new NamePart()
-                                    {
-                                        KnownType = Gx.Types.NamePartType.Surname,
-                                        Value = "User",
-                                    }
-                                }
-                            },
-                        },
-                        Preferred = true,
-                    }
-                },
-                Facts = new List<Fact>()
-                {
-                    new Fact()
-                    {
-                        KnownType = Gx.Types.FactType.Birth,
-                        Date = new DateInfo()
-                        {
-                            Original = "June 1800",
-                        },
-                        Place = new PlaceReference()
-                        {
-                            Original = "Provo, Utah, Utah, United States",
-                        },
-                    },
-                    new Fact()
-                    {
-                        KnownType = Gx.Types.FactType.Christening,
-                        Date = new DateInfo()
-                        {
-                            Original = "1802",
-                        },
-                        Place = new PlaceReference()
-                        {
-                            Original = "American Fork, Utah, Utah, United States",
-                        },
-                    },
-                    new Fact()
-                    {
-                        KnownType = Gx.Types.FactType.Residence,
-                        Date = new DateInfo()
-                        {
-                            Original = "4 Jan 1896",
-                        },
-                        Place = new PlaceReference()
-                        {
-                            Original = "Provo, Utah, Utah, United States",
-                        },
-                    },
-                    new Fact()
-                    {
-                        KnownType = Gx.Types.FactType.Death,
-                        Date = new DateInfo()
-                        {
-                            Original = "July 14, 1900",
-                        },
-                        Place = new PlaceReference()
-                        {
-                            Original = "Provo, Utah, Utah, United States",
-                        },
-                    },
-                    new Fact()
-                    {
-                        KnownType = Gx.Types.FactType.Burial,
-                        Date = new DateInfo()
-                        {
-                            Original = "1900",
-                        },
-                        Place = new PlaceReference()
-                        {
-                            Original = "Sandy, Salt Lake, Utah, United States",
-                        },
-                    }
-                }
-            };
+                .SetLiving(false)
+                .SetGender(new Gender().SetType(GenderType.Female))
+                .SetName(new Name()
+                    .SetType(NameType.BirthName)
+                    .SetNameForm(new NameForm()
+                        .SetFullText("GedcomX User")
+                        .SetPart(new NamePart(NamePartType.Given, "GedcomX"))
+                        .SetPart(new NamePart(NamePartType.Surname, "User")))
+                    .SetNameForm(new NameForm()
+                        .SetFullText("GedcomX2 User")
+                        .SetPart(new NamePart(NamePartType.Given, "GedcomX2"))
+                        .SetPart(new NamePart(NamePartType.Surname, "User")))
+                    .SetPreferred(true))
+                .SetFact(new Fact()
+                    .SetType(FactType.Birth)
+                    .SetDate(new DateInfo().SetOriginal("June 1800"))
+                    .SetPlace(new PlaceReference().SetOriginal("Provo, Utah, Utah, United States")))
+                .SetFact(new Fact()
+                    .SetType(FactType.Christening)
+                    .SetDate(new DateInfo().SetOriginal("1802"))
+                    .SetPlace(new PlaceReference().SetOriginal("American Fork, Utah, Utah, United States")))
+                .SetFact(new Fact()
+                    .SetType(FactType.Residence)
+                    .SetDate(new DateInfo().SetOriginal("4 Jan 1896"))
+                    .SetPlace(new PlaceReference().SetOriginal("Provo, Utah, Utah, United States")))
+                .SetFact(new Fact()
+                    .SetType(FactType.Death)
+                    .SetDate(new DateInfo().SetOriginal("July 14, 1900"))
+                    .SetPlace(new PlaceReference().SetOriginal("Provo, Utah, Utah, United States")))
+                .SetFact(new Fact()
+                    .SetType(FactType.Burial)
+                    .SetDate(new DateInfo().SetOriginal("1900"))
+                    .SetPlace(new PlaceReference().SetOriginal("Sandy, Salt Lake, Utah, United States")));
         }
 
         public static SourceReference GetPersonSourceReference()
         {
             return new SourceReference()
-            {
-                Attribution = new Attribution()
-                {
-                    ChangeMessage = "Family is at the same address found in other sources associated with this family.  Names are a good match.  Estimated births are reasonable.",
-                },
-                DescriptionRef = "https://sandbox.familysearch.org/platform/sources/descriptions/MMH1-PNF",
-            };
+                .SetAttribution(new Attribution()
+                    .SetChangeMessage("Family is at the same address found in other sources associated with this family.  Names are a good match.  Estimated births are reasonable."))
+                    .SetDescriptionRef("https://sandbox.familysearch.org/platform/sources/descriptions/MMH1-PNF");
         }
 
         public static Person GetCreatePersonConclusion(string personId)
@@ -407,21 +360,13 @@ namespace Gedcomx.Rs.Api.Test
             };
         }
 
-        public static Note GetCreateNote(string contributorResourceId)
+        public static Note GetCreateNote()
         {
             return new Note()
-            {
-                Subject = "Sample",
-                Text = "Sample note text",
-                Attribution = new Attribution()
-                {
-                    Contributor = new ResourceReference()
-                    {
-                        Resource = "https://familysearch.org/platform/users/agents/" + contributorResourceId,
-                        ResourceId = contributorResourceId,
-                    },
-                },
-            };
+                .SetSubject("Sample")
+                .SetText("Sample note text")
+                .SetAttribution(new Attribution()
+                    .SetContributor(new ResourceReference("https://familysearch.org/platform/users/agents/MM6M-8QJ").SetResourceId("MM6M-8QJ")));
         }
 
         public static Fact GetBirthFact()
@@ -583,23 +528,6 @@ namespace Gedcomx.Rs.Api.Test
             };
         }
 
-        public static DataSource GetDataSource(String name, String contentType, String filePath)
-        {
-            DataSource result = null;
-
-            if (System.IO.File.Exists(filePath))
-            {
-                result = new DataSourceTestImpl(name, contentType, new StreamReader(filePath).BaseStream);
-            }
-
-            return result;
-        }
-
-        public static DataSource GetDataSource(String name, String contentType, Byte[] bytes)
-        {
-            return new DataSourceTestImpl(name, contentType, new MemoryStream(bytes));
-        }
-
         public static Name GetCreateName(String name, NameType type, bool preferred)
         {
             var nameParts = GetNameParts(name);
@@ -638,45 +566,19 @@ namespace Gedcomx.Rs.Api.Test
             return result;
         }
 
-        public static SourceDescription GetCreateSourceDescription(string contributorResourceId)
+        public static SourceDescription GetCreateSourceDescription()
         {
             return new SourceDescription()
-            {
-                Citations = new List<SourceCitation>()
-                {
-                    new SourceCitation()
-                    {
-                        Value = "\"United States Census, 1900.\" database and digital images, FamilySearch (https://familysearch.org/: accessed 17 Mar 2012), Ethel Hollivet, 1900; citing United States Census Office, Washington, D.C., 1900 Population Census Schedules, Los Angeles, California, population schedule, Los Angeles Ward 6, Enumeration District 58, p. 20B, dwelling 470, family 501, FHL microfilm 1,240,090; citing NARA microfilm publication T623, roll 90.",
-                    }
-                },
-                Titles = new List<TextValue>()
-                {
-                    new TextValue()
-                    {
-                        Value = "1900 US Census, Ethel Hollivet",
-                    }
-                },
-                Notes = new List<Note>()
-                { 
-                    new Note()
-                    {
-                        Text = "Ethel Hollivet (line 75) with husband Albert Hollivet (line 74); also in the dwelling: step-father Joseph E Watkins (line 72), mother Lina Watkins (line 73), and grandmother -- Lina's mother -- Mary Sasnett (line 76).  Albert's mother and brother also appear on this page -- Emma Hollivet (line 68), and Eddie (line 69).",
-                    }
-                },
-                Attribution = new Attribution()
-                {
-                    Contributor = new ResourceReference()
-                    {
-                        Resource = "https://familysearch.org/platform/users/agents/" + contributorResourceId,
-                        ResourceId = contributorResourceId
-                    },
-                    Modified = DateTime.Now,
-                    ChangeMessage = "This is the change message",
-                }
-            };
+                .SetCitation("\"United States Census, 1900.\" database and digital images, FamilySearch (https://familysearch.org/: accessed 17 Mar 2012), Ethel Hollivet, 1900; citing United States Census Office, Washington, D.C., 1900 Population Census Schedules, Los Angeles, California, population schedule, Los Angeles Ward 6, Enumeration District 58, p. 20B, dwelling 470, family 501, FHL microfilm 1,240,090; citing NARA microfilm publication T623, roll 90.")
+                .SetTitle("1900 US Census, Ethel Hollivet")
+                .SetNote("Ethel Hollivet (line 75) with husband Albert Hollivet (line 74); also in the dwelling: step-father Joseph E Watkins (line 72), mother Lina Watkins (line 73), and grandmother -- Lina's mother -- Mary Sasnett (line 76).  Albert's mother and brother also appear on this page -- Emma Hollivet (line 68), and Eddie (line 69).")
+                .SetAttribution(new Attribution()
+                    .SetContributor(new ResourceReference("https://familysearch.org/platform/users/agents/MM6M-8QJ").SetResourceId("MM6M-8QJ"))
+                    .SetModified(DateTime.Now)
+                    .SetChangeMessage("This is the change message"));
         }
 
-        public static SourceDescription GetCreateUserSourceDescription(string memoryUri, string contributorResourceId)
+        public static SourceDescription GetCreateUserSourceDescription(string memoryUri)
         {
             return new SourceDescription()
             {
@@ -711,15 +613,15 @@ namespace Gedcomx.Rs.Api.Test
             return result;
         }
 
-        public static Bitmap GetCreatePhoto()
+        public static Bitmap GetCreatePhoto(int width = 5, int height = 5)
         {
-            var result = new Bitmap(5, 5);
+            var result = new Bitmap(width, height);
 
             using (var graphics = Graphics.FromImage(result))
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < width; i++)
                 {
-                    for (int j = 0; j < 5; j++)
+                    for (int j = 0; j < height; j++)
                     {
                         graphics.DrawRectangle(new Pen(new SolidBrush(GetRandomColor())), new Rectangle(i, j, 1, 1));
                     }
@@ -739,11 +641,11 @@ namespace Gedcomx.Rs.Api.Test
             return Color.FromArgb(a, r, g, b);
         }
 
-        public static Gx.Gedcomx GetGedcomxObject()
+        public static Gx.Gedcomx GetGedcomxObjectForDeepCompare()
         {
             return new Gx.Gedcomx()
             {
-                Persons = new List<Gx.Conclusion.Person>() { TestBacking.GetCreateMalePerson() },
+                Persons = new List<Gx.Conclusion.Person>() { TestBacking.GetPersonForDeepCompare() },
                 Relationships = new List<Gx.Conclusion.Relationship>(),
                 SourceDescriptions = new List<Gx.Source.SourceDescription>(),
                 Agents = new List<Gx.Agent.Agent>(),
@@ -757,33 +659,53 @@ namespace Gedcomx.Rs.Api.Test
                 ExtensionElementsXml = new List<object>(),
             };
         }
-    }
 
-    public class DataSourceTestImpl : DataSource
-    {
-        public DataSourceTestImpl(String name, String contentType, Stream inputStream)
+        public static Byte[] GetCreatePdf()
         {
-            Name = name;
-            ContentType = contentType;
-            InputStream = inputStream;
+            var doc = new iTextSharp.text.Document();
+            var ms = new MemoryStream();
+            var writer = PdfWriter.GetInstance(doc, ms);
+            var random = new Random();
+
+            doc.Open();
+
+            for (var i = 0; i < 5; i++)
+            {
+                doc.Add(new iTextSharp.text.Paragraph(GetRandomString(random)));
+            }
+
+            doc.Close();
+
+            return ms.ToArray();
         }
 
-        public Stream InputStream
+
+        public static Byte[] GetCreateTxt()
         {
-            get;
-            private set;
+            var ms = new MemoryStream();
+            var random = new Random();
+
+            using (var writer = new StreamWriter(ms))
+            {
+                for (var i = 0; i < 5; i++)
+                {
+                    writer.WriteLine(GetRandomString(random));
+                }
+            }
+
+            return ms.ToArray();
         }
 
-        public String ContentType
+        private static String GetRandomString(Random random)
         {
-            get;
-            private set;
-        }
+            var result = string.Empty;
 
-        public String Name
-        {
-            get;
-            private set;
+            for (var i = 0; i < 32; i++)
+            {
+                result += (char)random.Next(1, 256);
+            }
+
+            return result;
         }
     }
 }

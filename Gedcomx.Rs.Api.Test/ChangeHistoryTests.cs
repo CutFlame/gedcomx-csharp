@@ -20,7 +20,7 @@ namespace Gedcomx.Rs.Api.Test
         public void Initialize()
         {
             tree = new FamilySearchFamilyTree(true);
-            tree.AuthenticateViaOAuth2Password("sdktester", "1234sdkpass", "WCQY-7J1Q-GKVV-7DNM-SQ5M-9Q5H-JX3H-CMJK");
+            tree.AuthenticateViaOAuth2Password(Resources.TestUserName, Resources.TestPassword, Resources.TestClientId);
         }
 
         [Test]
@@ -77,6 +77,26 @@ namespace Gedcomx.Rs.Api.Test
             Assert.IsNotNull(state.Page);
             Assert.IsNotNull(state.Page.Entries);
             Assert.Greater(state.Page.Entries.Count, 0);
+        }
+
+        [Test]
+        public void TestReadChildAndParentsRelationshipChangeHistory()
+        {
+            var father = (FamilyTreePersonState)tree.AddPerson(TestBacking.GetCreateMalePerson()).Get();
+            var mother = tree.AddPerson(TestBacking.GetCreateFemalePerson());
+            var son = tree.AddPerson(TestBacking.GetCreateMalePerson());
+            var relationship = (ChildAndParentsRelationshipState)tree.AddChildAndParentsRelationship(TestBacking.GetCreateChildAndParentsRelationship(father, mother, son)).Get();
+            var state = relationship.ReadChangeHistory();
+
+            Assert.DoesNotThrow(() => state.IfSuccessful());
+            Assert.AreEqual(HttpStatusCode.OK, state.Response.StatusCode);
+            Assert.IsNotNull(state.Entity);
+            Assert.IsNotNull(state.Entity.Entries);
+            Assert.Greater(state.Entity.Entries.Count, 0);
+
+            father.Delete();
+            mother.Delete();
+            son.Delete();
         }
     }
 }

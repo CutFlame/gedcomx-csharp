@@ -39,6 +39,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Flurl.1.0.2\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+MonoTouch10\Flurl.dll</HintPath>
     </Reference>
+    <Reference Include="JsonLD">
+      <HintPath>..\packages\json-ld.net.1.0.3\lib\net40\JsonLD.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -46,9 +49,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="RestSharp, Version=104.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+      <HintPath>..\packages\RestSharp.104.5.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
@@ -100,9 +103,11 @@
     <Compile Include="StateFactory.cs" />
     <Compile Include="StateTransitionOption.cs" />
     <Compile Include="Util\AncestryTree.cs" />
+    <Compile Include="Util\BasicDataSource.cs" />
     <Compile Include="Util\DataSource.cs" />
     <Compile Include="Util\DescendancyTree.cs" />
     <Compile Include="Util\EmbeddedLinkLoader.cs" />
+    <Compile Include="Util\FileDataSource.cs" />
     <Compile Include="Util\GedcomxBaseSearchQueryBuilder.cs" />
     <Compile Include="Util\GedcomxPersonSearchQueryBuilder.cs" />
     <Compile Include="Util\GedcomxPlaceSearchQueryBuilder.cs" />
@@ -114,6 +119,7 @@
     <Compile Include="Util\Log4NetLoggingFilter.cs" />
     <Compile Include="Util\PagedFeedEnumerator.cs" />
     <Compile Include="Util\FilterableRestClient.cs" />
+    <Compile Include="Util\RdfExtensions.cs" />
     <Compile Include="Util\RestClientExtensions.cs" />
     <Compile Include="Util\ServiceHelper.cs" />
     <Compile Include="Util\UriExtensions.cs" />

@@ -61,6 +61,14 @@ namespace Gx.Rs.Api
             }
         }
 
+        public Collection Collection
+        {
+            get
+            {
+                return Entity == null ? null : Entity.Collections == null ? null : Entity.Collections.FirstOrDefault();
+            }
+        }
+
         public CollectionState Update(Collection collection, params StateTransitionOption[] options)
         {
             return (CollectionState)Post(new Gedcomx().AddCollection(collection), options);
@@ -312,7 +320,6 @@ namespace Gx.Rs.Api
             Byte[] inputBytes = GetBytes(artifact.InputStream);
             if (artifact.Name != null)
             {
-                //request.AddFile("artifact", inputBytes, ParameterType.RequestBody);
                 request.Files.Add(new FileParameter()
                 {
                     Name = "artifact",

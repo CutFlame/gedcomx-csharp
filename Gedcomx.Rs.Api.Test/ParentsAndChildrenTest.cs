@@ -16,14 +16,13 @@ namespace Gedcomx.Rs.Api.Test
     [TestFixture]
     public class ParentsAndChildrenTest
     {
-        private readonly String CONTRIBUTOR_RESOURCE_ID = "MM6M-8QJ";
         private FamilySearchFamilyTree tree;
 
         [TestFixtureSetUp]
         public void Initialize()
         {
             tree = new FamilySearchFamilyTree(true);
-            tree.AuthenticateViaOAuth2Password("sdktester", "1234sdkpass", "WCQY-7J1Q-GKVV-7DNM-SQ5M-9Q5H-JX3H-CMJK");
+            tree.AuthenticateViaOAuth2Password(Resources.TestUserName, Resources.TestPassword, Resources.TestClientId);
             Assert.DoesNotThrow(() => tree.IfSuccessful());
             Assert.IsNotNullOrEmpty(tree.CurrentAccessToken);
         }
@@ -73,7 +72,7 @@ namespace Gedcomx.Rs.Api.Test
             var mother = tree.AddPerson(TestBacking.GetCreateFemalePerson());
             var son = tree.AddPerson(TestBacking.GetCreateMalePerson());
             var relationship = (ChildAndParentsRelationshipState)tree.AddChildAndParentsRelationship(TestBacking.GetCreateChildAndParentsRelationship(father, mother, son)).Get();
-            var state = relationship.AddNote(TestBacking.GetCreateNote(CONTRIBUTOR_RESOURCE_ID));
+            var state = relationship.AddNote(TestBacking.GetCreateNote());
 
             Assert.DoesNotThrow(() => state.IfSuccessful());
             Assert.AreEqual(HttpStatusCode.Created, state.Response.StatusCode);
