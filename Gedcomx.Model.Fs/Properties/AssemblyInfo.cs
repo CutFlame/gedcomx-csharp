@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GEDCOM X File")]
-[assembly: AssemblyDescription("Contains libraries to read and write GEDCOM X files and provides core serialization functionality for all web API communications.")]
+[assembly: AssemblyTitle("Gx.Fs")]
+[assembly: AssemblyDescription("Contains FamilySearch specific GEDCOM X model extensions.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("FamilySearch")]
-[assembly: AssemblyProduct("GEDCOM X File")]
+[assembly: AssemblyProduct("Gx.Fs")]
 [assembly: AssemblyCopyright("Copyright © 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("868983ec-6094-44ee-aaa1-ef455cdfab72")]
+[assembly: Guid("5daf5f75-3239-4c44-8e79-8496d060c349")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -8,7 +8,7 @@
     <ProjectGuid>{6C4454BD-26BF-43AD-9732-9F1CE4B1CB87}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Gx.Rs.Api</RootNamespace>
-    <AssemblyName>Gedcomx.Rs.Api</AssemblyName>
+    <AssemblyName>Gedcomx.API.SDK</AssemblyName>
     <Description>Library for accessing a GEDCOM X-compliant API.</Description>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
@@ -70,7 +70,7 @@
   <ItemGroup>
     <Compile Include="AgentState.cs" />
     <Compile Include="AncestryResultsState.cs" />
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CollectionsState.cs" />
     <Compile Include="CollectionState.cs" />
     <Compile Include="DescendancyResultsState.cs" />
@@ -132,6 +132,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GEDCOM X File\GEDCOM X File.csproj">
