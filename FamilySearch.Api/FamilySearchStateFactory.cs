@@ -156,7 +156,7 @@ namespace FamilySearch.Api
         /// <returns>
         /// A <see cref="CollectionState"/> instance containing the REST API response.
         /// </returns>
-        protected override CollectionState NewCollectionState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
+		protected internal override CollectionState NewCollectionState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
         {
             return new FamilySearchCollectionState(request, response, client, accessToken, this);
         }
@@ -186,7 +186,7 @@ namespace FamilySearch.Api
         /// <returns>
         /// A <see cref="SourceDescriptionState"/> instance containing the REST API response.
         /// </returns>
-        protected override SourceDescriptionState NewSourceDescriptionState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
+		protected internal override SourceDescriptionState NewSourceDescriptionState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
         {
             return new FamilySearchSourceDescriptionState(request, response, client, accessToken, this);
         }
@@ -216,7 +216,7 @@ namespace FamilySearch.Api
         /// <returns>
         /// A <see cref="PersonState"/> instance containing the REST API response.
         /// </returns>
-        protected override PersonState NewPersonState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
+		protected internal override PersonState NewPersonState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
         {
             return base.NewPersonState(request, response, client, accessToken);
         }
@@ -276,7 +276,7 @@ namespace FamilySearch.Api
         /// <returns>
         /// A <see cref="PlaceDescriptionState"/> instance containing the REST API response.
         /// </returns>
-        protected override PlaceDescriptionState NewPlaceDescriptionState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
+		protected internal override PlaceDescriptionState NewPlaceDescriptionState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
         {
             return new FamilySearchPlaceDescriptionState(request, response, client, accessToken, this);
         }
@@ -296,7 +296,7 @@ namespace FamilySearch.Api
         /// 
         /// This specific overload enables the "birth-date-not-considered-death-declaration" feature for every client created.
         /// </remarks>
-        protected override IFilterableRestClient LoadDefaultClient(Uri uri)
+		protected internal override IFilterableRestClient LoadDefaultClient(Uri uri)
         {
             var client = base.LoadDefaultClient(uri);
 

@@ -68,7 +68,7 @@ namespace FamilySearch.Api.Ft
         /// <returns>
         /// A <see cref="RelationshipsState"/> instance containing the REST API response.
         /// </returns>
-        protected override RelationshipsState NewRelationshipsState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
+		protected internal override RelationshipsState NewRelationshipsState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
         {
             return new FamilyTreeRelationshipsState(request, response, client, accessToken, this);
         }
@@ -98,7 +98,7 @@ namespace FamilySearch.Api.Ft
         /// <returns>
         /// A <see cref="CollectionState"/> instance containing the REST API response.
         /// </returns>
-        protected override CollectionState NewCollectionState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
+		protected internal override CollectionState NewCollectionState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
         {
             return new FamilySearchFamilyTree(request, response, client, accessToken, this);
         }
@@ -113,7 +113,7 @@ namespace FamilySearch.Api.Ft
         /// <returns>
         /// A <see cref="PersonState"/> instance containing the REST API response.
         /// </returns>
-        protected override PersonState NewPersonState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
+		protected internal override PersonState NewPersonState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
         {
             return new FamilyTreePersonState(request, response, client, accessToken, this);
         }
@@ -128,7 +128,7 @@ namespace FamilySearch.Api.Ft
         /// <returns>
         /// A <see cref="RelationshipState"/> instance containing the REST API response.
         /// </returns>
-        protected override RelationshipState NewRelationshipState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
+		protected internal override RelationshipState NewRelationshipState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
         {
             return new FamilyTreeRelationshipState(request, response, client, accessToken, this);
         }
@@ -158,7 +158,7 @@ namespace FamilySearch.Api.Ft
         /// <returns>
         /// A <see cref="PersonParentsState"/> instance containing the REST API response.
         /// </returns>
-        protected override PersonParentsState NewPersonParentsState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
+		protected internal override PersonParentsState NewPersonParentsState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
         {
             return new FamilyTreePersonParentsState(request, response, client, accessToken, this);
         }
@@ -173,7 +173,7 @@ namespace FamilySearch.Api.Ft
         /// <returns>
         /// A <see cref="PersonChildrenState"/> instance containing the REST API response.
         /// </returns>
-        protected override PersonChildrenState NewPersonChildrenState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
+		protected internal override PersonChildrenState NewPersonChildrenState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken)
         {
             return new FamilyTreePersonChildrenState(request, response, client, accessToken, this);
         }
