@@ -8,14 +8,13 @@ and [GEDCOM X JSON](https://github.com/FamilySearch/gedcomx/blob/master/specific
 # NuGet Package Information
 
 
-| Package ID          | Link                |
-|---------------------|---------------------|
-| Insert package name | insert package link |
+| Package ID | Link |
+|------------|------|
+| Gedcomx.Model | http://www.nuget.org/packages/Gedcomx.Model/ |
 
 See [the section on using these libraries](../README.md#Use).
-Insert content when ready.
 
-To determine the latest version, ~ visit the NuGet link listed above ~.
+To determine the latest version visit the NuGet link listed above.
 
 # Use
 
@@ -119,5 +118,5 @@ Gedcomx gx = serializer.Deserialize<Gedcomx>(stream);
 ## The Example Test Suite --- Update Links
 
 For a suite of examples on how to use the model classes, see 
-[the `org.gedcomx.examples` test suite](./src/test/C#/org/gedcomx/examples/). Many of the tests have
+[the `org.gedcomx.examples` test suite](../Gedcomx.Rs.Api.Test/Examples). Many of the tests have
 an associated document in [the GEDCOM X recipe book](http://www.gedcomx.org/Recipe-Book.html).`

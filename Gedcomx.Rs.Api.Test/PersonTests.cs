@@ -315,7 +315,7 @@ namespace Gedcomx.Rs.Api.Test
         public void TestUpdatePersonWithPreconditions()
         {
             var state = collection.ReadPerson(new Uri(PERSON_WITH_DATA_URI));
-            var cond = new Preconditions(state.LastModified);
+            var cond = new Preconditions(state);
             var state2 = state.UpdateFacts(state.Person.Facts.ToArray(), cond);
             Assert.DoesNotThrow(() => state2.IfSuccessful());
             Assert.AreEqual(HttpStatusCode.NoContent, state2.Response.StatusCode);
@@ -700,6 +700,28 @@ namespace Gedcomx.Rs.Api.Test
             Assert.DoesNotThrow(() => state.IfSuccessful());
             Assert.AreEqual(HttpStatusCode.OK, state.Response.StatusCode);
             Assert.IsFalse(state.IsAllowed);
+        }
+
+        [Test]
+        public void TestMergePerson()
+        {
+            var person1 = (FamilyTreePersonState)tree.AddPerson(TestBacking.GetCreateMalePerson()).Get();
+            var person2 = (FamilyTreePersonState)tree.AddPerson(TestBacking.GetCreateMalePerson()).Get();
+            var merge = person1.ReadMergeAnalysis(person2);
+            var m = new Merge();
+
+            m.ResourcesToCopy = new List<ResourceReference>();
+            m.ResourcesToDelete = new List<ResourceReference>();
+            m.ResourcesToCopy.AddRange(merge.Analysis.DuplicateResources);
+            m.ResourcesToCopy.AddRange(merge.Analysis.ConflictingResources.Select(x => x.DuplicateResource));
+            var state = merge.DoMerge(m);
+
+            Assert.DoesNotThrow(() => state.IfSuccessful());
+            Assert.AreEqual(HttpStatusCode.NoContent, state.Response.StatusCode);
+            Assert.AreEqual(person1.Get().GetSelfUri(), person2.Get().GetSelfUri());
+
+            person1.Delete();
+            person2.Delete();
         }
     }
 }

@@ -11,6 +11,9 @@ using System.Text;
 
 namespace Gx.Rs.Api
 {
+    /// <summary>
+    /// The VocabElementState exposes management functions for a vocab element.
+    /// </summary>
     public class VocabElementState : GedcomxApplicationState<RDFDataset>
     {
         private RDFDataset model;
@@ -23,11 +26,25 @@ namespace Gx.Rs.Api
             options.useNamespaces = true;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VocabElementState"/> class.
+        /// </summary>
+        /// <param name="request">The REST API request that will be used to instantiate this state instance.</param>
+        /// <param name="response">The REST API response that was produced from the REST API request.</param>
+        /// <param name="client">The REST API client to use for API calls.</param>
+        /// <param name="accessToken">The access token to use for subsequent invocations of the REST API client.</param>
+        /// <param name="stateFactory">The state factory to use for state instantiation.</param>
         protected internal VocabElementState(IRestRequest request, IRestResponse response, IFilterableRestClient client, String accessToken, StateFactory stateFactory)
             : base(request, response, client, accessToken, stateFactory)
         {
         }
 
+        /// <summary>
+        /// Gets the rel name for the currrent state instance. This is expected to be overridden.
+        /// </summary>
+        /// <value>
+        /// The rel name for the currrent state instance
+        /// </value>
         public override String SelfRel
         {
             get
@@ -36,11 +53,23 @@ namespace Gx.Rs.Api
             }
         }
 
+        /// <summary>
+        /// Clones the current state instance.
+        /// </summary>
+        /// <param name="request">The REST API request used to create this state instance.</param>
+        /// <param name="response">The REST API response used to create this state instance.</param>
+        /// <param name="client">The REST API client used to create this state instance.</param>
+        /// <returns>A cloned instance of the current state instance.</returns>
         protected override GedcomxApplicationState<RDFDataset> Clone(IRestRequest request, IRestResponse response, IFilterableRestClient client)
         {
             return new VocabElementState(request, response, client, this.CurrentAccessToken, this.stateFactory);
         }
 
+        /// <summary>
+        /// Returns the <see cref="RDFDataset"/> from the REST API response.
+        /// </summary>
+        /// <param name="response">The REST API response.</param>
+        /// <returns>The <see cref="RDFDataset"/> from the REST API response.</returns>
         protected override RDFDataset LoadEntity(IRestResponse response)
         {
             var token = JSONUtils.FromString(response.Content);
@@ -50,6 +79,10 @@ namespace Gx.Rs.Api
             return model;
         }
 
+        /// <summary>
+        /// Gets the vocab element represented by this state instance.
+        /// </summary>
+        /// <returns>The vocab element represented by this state instance.</returns>
         public VocabElement GetVocabElement()
         {
             VocabElement vocabElement = new VocabElement();
@@ -94,6 +127,16 @@ namespace Gx.Rs.Api
             return vocabElement;
         }
 
+        /// <summary>
+        /// Gets the main data element represented by this state instance.
+        /// </summary>
+        /// <value>
+        /// The main data element represented by this state instance.
+        /// </value>
+        /// <remarks>
+        /// This class does not have a <see cref="SupportsLinks"/> entity; therefore, this
+        /// always returns null.
+        /// </remarks>
         protected override SupportsLinks MainDataElement
         {
             get
@@ -102,6 +145,12 @@ namespace Gx.Rs.Api
             }
         }
 
+        /// <summary>
+        /// Gets the <see cref="RDFDataset"/> represented by this state instance.
+        /// </summary>
+        /// <value>
+        /// The <see cref="RDFDataset"/> represented by this state instance.
+        /// </value>
         private RDFDataset Model
         {
             get

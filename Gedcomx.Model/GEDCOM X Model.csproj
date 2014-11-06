@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="Agent.cs" />
+    <Compile Include="FactQualifierType.cs" />
+    <Compile Include="NamePartQualifierType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributable.cs" />
     <Compile Include="Attribution.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="FieldValueDescriptor.cs" />
     <Compile Include="Util\JsonIdentifiersConverter.cs" />
     <Compile Include="Util\JsonUnixTimestampConverter.cs" />
+    <Compile Include="Util\XmlQNameEnumUtil.cs" />
     <Compile Include="VocabElement.cs" />
     <Compile Include="VocabElementList.cs" />
   </ItemGroup>
