@@ -30,7 +30,7 @@ namespace Gx.Rs.Api.Util
         /// Initializes a new instance of the <see cref="FilterableRestClient"/> class.
         /// </summary>
         /// <param name="baseUrl">The base URI for the REST API client.</param>
-        public FilterableRestClient(string baseUrl)
+        public FilterableRestClient(Uri baseUrl)
             : base(baseUrl)
         {
             filters = new List<IFilter>();

@@ -20,9 +20,9 @@ namespace Gx.Rs.Api.Util
         /// The specified URI should be an absolute URI. The base URL is determined by extracting the authority from the specified URI, which will fail
         /// for relative URIs.
         /// </remarks>
-        public static string GetBaseUrl(this Uri @this)
+        public static Uri GetBaseUrl(this Uri @this)
         {
-            return @this.GetLeftPart(UriPartial.Authority);
+			return new Uri(@this.GetLeftPart(UriPartial.Authority));
         }
     }
 }
